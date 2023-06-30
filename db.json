@@ -1,8 +1,15 @@
 {
-    "users": [
-        {
-            "id": 1,
-            "name": "NTBPhuoc"
-        }
-    ]
+  "users": [
+    {
+      "block": true,
+      "id": 1
+    },
+    {
+      "name": "Mèo",
+      "email": "123123",
+      "phoneNumber": "1312",
+      "block": false,
+      "id": 2
+    }
+  ]
 }

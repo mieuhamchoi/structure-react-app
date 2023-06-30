@@ -18,6 +18,35 @@ const createNewUsers = createAsyncThunk(
     }
 )
 
+const deleteUserById = createAsyncThunk(
+    "deleteUserByid",
+    async (userId) => {
+        //http://localhost:4000/users/1
+        let res = await axios.delete(process.env.REACT_APP_SERVER_JSON + 'users/' + userId);
+        return userId
+    }
+)
+
+const updateUser = createAsyncThunk(
+    "updateUser",
+    async (dataObj) => {
+        console.log("dataObj dataObj", dataObj)
+        //http://localhost:4000/users/1   , editData
+        let res = await axios.put(process.env.REACT_APP_SERVER_JSON + 'users/' + dataObj.userId,  dataObj.editData);
+        return res.data
+    }
+)
+
+const setStatusUser = createAsyncThunk(
+    "setStatusUser",
+    async (dataObj) => {
+        console.log("dataObj dataObj", dataObj)
+        //http://localhost:4000/users/1   , editData
+        let res = await axios.patch(process.env.REACT_APP_SERVER_JSON + 'users/' + dataObj.userId,  dataObj.patchData);
+        return res.data
+    }
+)
+
 const counterSlice = createSlice(
     {
         name: "counter",
@@ -56,9 +85,59 @@ const counterSlice = createSlice(
             });
             builder.addCase(createNewUsers.fulfilled, (state, action) => {
                 state.loading = false;
-                console.log("đã vào fulfilled", action.payload)
+                state.users.push(action.payload)
             });
             builder.addCase(createNewUsers.rejected, (state, action) => {
+                state.loading = false;
+                console.log("đã vào rejected")
+            });
+            // delete user
+            builder.addCase(deleteUserById.pending, (state, action) => {
+                state.loading = true;
+                console.log("đã vào pending")
+            });
+            builder.addCase(deleteUserById.fulfilled, (state, action) => {
+                state.loading = false;
+                console.log("đã vào fulfilled", action.payload)
+                state.users = state.users.filter(user => user.id != action.payload)
+            });
+            builder.addCase(deleteUserById.rejected, (state, action) => {
+                state.loading = false;
+                console.log("đã vào rejected")
+            });
+            // edit user
+            builder.addCase(updateUser.pending, (state, action) => {
+                state.loading = true;
+                console.log("đã vào pending")
+            });
+            builder.addCase(updateUser.fulfilled, (state, action) => {
+                state.loading = false;
+                state.users = state.users.map(user => {
+                    if (user.id == action.payload.id) {
+                        return action.payload
+                    }
+                    return user
+                })
+            });
+            builder.addCase(updateUser.rejected, (state, action) => {
+                state.loading = false;
+                console.log("đã vào rejected")
+            });
+            // set status user
+            builder.addCase(setStatusUser.pending, (state, action) => {
+                state.loading = true;
+                console.log("đã vào pending")
+            });
+            builder.addCase(setStatusUser.fulfilled, (state, action) => {
+                state.loading = false;
+                state.users = state.users.map(user => {
+                    if (user.id == action.payload.id) {
+                        return action.payload
+                    }
+                    return user
+                })
+            });
+            builder.addCase(setStatusUser.rejected, (state, action) => {
                 state.loading = false;
                 console.log("đã vào rejected")
             });
@@ -69,7 +148,10 @@ const counterSlice = createSlice(
 export const counterActions = {
     ... counterSlice.actions,
     findAllUsers,
-    createNewUsers
+    createNewUsers,
+    deleteUserById,
+    updateUser,
+    setStatusUser
 }
 export default counterSlice.reducer;
 
