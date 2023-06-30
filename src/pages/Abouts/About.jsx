@@ -9,6 +9,10 @@ export default function About() {
   const counterStore = useSelector(store => store.counterStore)
 
   useEffect(() => {
+    dispatch(counterActions.findAllUsers())
+  }, [])
+
+  useEffect(() => {
     console.log("counterStore", counterStore.users)
   }, [counterStore.users])
   return (
@@ -17,9 +21,6 @@ export default function About() {
         counterStore.loading ? <Loading/> : <></>
       }
       <h1>About Page</h1>
-      <button onClick={() => {
-        dispatch(counterActions.findAllUsers())
-      }}>Find All Users</button>
       <Outlet></Outlet>
     </div>
   )

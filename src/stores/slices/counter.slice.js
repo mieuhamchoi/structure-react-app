@@ -9,6 +9,15 @@ const findAllUsers = createAsyncThunk(
     }
 )
 
+const createNewUsers = createAsyncThunk(
+    "createNewUsers",
+    async (newUser) => {
+        //http://localhost:4000/users
+        let res = await axios.post(process.env.REACT_APP_SERVER_JSON + 'users', newUser);
+        return res.data
+    }
+)
+
 const counterSlice = createSlice(
     {
         name: "counter",
@@ -40,13 +49,27 @@ const counterSlice = createSlice(
                 state.loading = false;
                 console.log("đã vào rejected")
             });
+            // create new user
+            builder.addCase(createNewUsers.pending, (state, action) => {
+                state.loading = true;
+                console.log("đã vào pending")
+            });
+            builder.addCase(createNewUsers.fulfilled, (state, action) => {
+                state.loading = false;
+                console.log("đã vào fulfilled", action.payload)
+            });
+            builder.addCase(createNewUsers.rejected, (state, action) => {
+                state.loading = false;
+                console.log("đã vào rejected")
+            });
         }
     }
 )
 
 export const counterActions = {
     ... counterSlice.actions,
-    findAllUsers
+    findAllUsers,
+    createNewUsers
 }
 export default counterSlice.reducer;
 
