@@ -66,50 +66,22 @@ const counterSlice = createSlice(
         },
         extraReducers: (builder) => {
             // find all users
-            builder.addCase(findAllUsers.pending, (state, action) => {
-                state.loading = true;
-                console.log("đã vào pending")
-            });
             builder.addCase(findAllUsers.fulfilled, (state, action) => {
                 state.loading = false;
                 state.users = [...action.payload]
             });
-            builder.addCase(findAllUsers.rejected, (state, action) => {
-                state.loading = false;
-                console.log("đã vào rejected")
-            });
             // create new user
-            builder.addCase(createNewUsers.pending, (state, action) => {
-                state.loading = true;
-                console.log("đã vào pending")
-            });
             builder.addCase(createNewUsers.fulfilled, (state, action) => {
                 state.loading = false;
                 state.users.push(action.payload)
             });
-            builder.addCase(createNewUsers.rejected, (state, action) => {
-                state.loading = false;
-                console.log("đã vào rejected")
-            });
             // delete user
-            builder.addCase(deleteUserById.pending, (state, action) => {
-                state.loading = true;
-                console.log("đã vào pending")
-            });
             builder.addCase(deleteUserById.fulfilled, (state, action) => {
                 state.loading = false;
                 console.log("đã vào fulfilled", action.payload)
                 state.users = state.users.filter(user => user.id != action.payload)
             });
-            builder.addCase(deleteUserById.rejected, (state, action) => {
-                state.loading = false;
-                console.log("đã vào rejected")
-            });
             // edit user
-            builder.addCase(updateUser.pending, (state, action) => {
-                state.loading = true;
-                console.log("đã vào pending")
-            });
             builder.addCase(updateUser.fulfilled, (state, action) => {
                 state.loading = false;
                 state.users = state.users.map(user => {
@@ -119,15 +91,7 @@ const counterSlice = createSlice(
                     return user
                 })
             });
-            builder.addCase(updateUser.rejected, (state, action) => {
-                state.loading = false;
-                console.log("đã vào rejected")
-            });
             // set status user
-            builder.addCase(setStatusUser.pending, (state, action) => {
-                state.loading = true;
-                console.log("đã vào pending")
-            });
             builder.addCase(setStatusUser.fulfilled, (state, action) => {
                 state.loading = false;
                 state.users = state.users.map(user => {
@@ -137,10 +101,26 @@ const counterSlice = createSlice(
                     return user
                 })
             });
-            builder.addCase(setStatusUser.rejected, (state, action) => {
-                state.loading = false;
-                console.log("đã vào rejected")
-            });
+            // xử lý các pending và rejected
+            builder.addMatcher(
+                (action) => {
+                    if (action.meta) {
+                        return action
+                    }
+                },
+                (state, action) => {
+                    if (action.meta) {
+                        if (action.meta.requestStatus == "pending") {
+                            console.log("đã vào pending")
+                            state.loading = false;
+                        }
+                        if (action.meta.requestStatus == "rejected") {
+                            console.log("đã vào rejected")
+                            state.loading = false;
+                        }
+                    }
+                }
+            );
         }
     }
 )
