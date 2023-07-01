@@ -17,6 +17,12 @@ React-redux: `https://react-redux.js.org/introduction/getting-started` (useDispa
 
 Reduxjs/toolkit: `https://redux-toolkit.js.org/` (createSlice, createAsyncThunk, configureStore) (npm i @reduxjs/toolkit)
 
+## Require Enviroment
+
+Node JS version =>  16+
+
+Npm version =>  integrated in node 16+
+
 ## Run App
 
 Required: PORT 3000 REQUIRED EMPTY PORT
