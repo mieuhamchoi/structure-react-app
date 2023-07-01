@@ -111,11 +111,11 @@ const counterSlice = createSlice(
                 (state, action) => {
                     if (action.meta) {
                         if (action.meta.requestStatus == "pending") {
-                            console.log("đã vào pending")
+                            console.log("đã vào pending của api: ",  action.type)
                             state.loading = false;
                         }
                         if (action.meta.requestStatus == "rejected") {
-                            console.log("đã vào rejected")
+                            console.log("đã vào rejected của api: ",  action.type)
                             state.loading = false;
                         }
                     }
