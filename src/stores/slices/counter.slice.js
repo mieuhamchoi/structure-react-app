@@ -67,23 +67,19 @@ const counterSlice = createSlice(
         extraReducers: (builder) => {
             // find all users
             builder.addCase(findAllUsers.fulfilled, (state, action) => {
-                state.loading = false;
                 state.users = [...action.payload]
             });
             // create new user
             builder.addCase(createNewUsers.fulfilled, (state, action) => {
-                state.loading = false;
                 state.users.push(action.payload)
             });
             // delete user
             builder.addCase(deleteUserById.fulfilled, (state, action) => {
-                state.loading = false;
                 console.log("đã vào fulfilled", action.payload)
                 state.users = state.users.filter(user => user.id != action.payload)
             });
             // edit user
             builder.addCase(updateUser.fulfilled, (state, action) => {
-                state.loading = false;
                 state.users = state.users.map(user => {
                     if (user.id == action.payload.id) {
                         return action.payload
@@ -93,7 +89,6 @@ const counterSlice = createSlice(
             });
             // set status user
             builder.addCase(setStatusUser.fulfilled, (state, action) => {
-                state.loading = false;
                 state.users = state.users.map(user => {
                     if (user.id == action.payload.id) {
                         return action.payload
@@ -111,11 +106,15 @@ const counterSlice = createSlice(
                 (state, action) => {
                     if (action.meta) {
                         if (action.meta.requestStatus == "pending") {
-                            console.log("đã vào pending của api: ",  action.type)
-                            state.loading = false;
+                            //console.log("đã vào pending của api: ",  action.type)
+                            state.loading = true;
                         }
                         if (action.meta.requestStatus == "rejected") {
-                            console.log("đã vào rejected của api: ",  action.type)
+                            //console.log("đã vào rejected của api: ",  action.type)
+                            state.loading = false;
+                        }
+                        if (action.meta.requestStatus == "fulfilled") {
+                            //console.log("đã vào fulfilled của api: ",  action.type)
                             state.loading = false;
                         }
                     }
