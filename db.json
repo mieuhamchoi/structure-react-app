@@ -1,50 +1,57 @@
 {
-  "users": [
-    {
-      "block": true,
-      "id": 1
-    },
-    {
-      "name": "Mèo",
-      "email": "123123",
-      "phoneNumber": "1312",
-      "block": false,
-      "id": 2
-    },
-    {
-      "name": "Tài 121",
-      "email": "ngoctien@gmail.com",
-      "phoneNumber": "121",
-      "block": false,
-      "id": 3
-    },
-    {
-      "name": "Tiên",
-      "email": "1312",
-      "phoneNumber": "1212",
-      "block": false,
-      "id": 4
-    },
-    {
-      "name": "Tài",
-      "email": "112",
-      "phoneNumber": "0329577177",
-      "block": false,
-      "id": 5
-    },
+  "userList": [
     {
       "name": "Hương",
       "email": "asdas",
       "phoneNumber": "121221",
       "block": false,
       "id": 6
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "userName": "admin",
+      "password": "123",
+      "isAdmin": true,
+      "firstName": "Thu",
+      "lastName": "Hương",
+      "email": "thuhuong@gmail.com",
+      "avatar": "https://firebasestorage.googleapis.com/v0/b/learnfirebase-afb02.appspot.com/o/userAvatars%2Fadmin.jpg?alt=media&token=3482a408-7ed1-41c6-b18f-eb730dc02623",
+      "carts": [
+        {
+          "productId": 1,
+          "quantity": 5,
+          "des": "123"
+        },
+        {
+          "productId": 2,
+          "quantity": 5,
+          "des": "123"
+        }
+      ]
     },
     {
-      "name": "1212",
-      "email": "adas",
-      "phoneNumber": "41324",
-      "block": false,
-      "id": 7
+      "id": 1,
+      "userName": "ntbphuoc",
+      "password": "123456",
+      "isAdmin": true,
+      "firstName": "Phước",
+      "lastName": "Nguyễn",
+      "email": "thuhuong@gmail.com",
+      "avatar": "https://firebasestorage.googleapis.com/v0/b/learnfirebase-afb02.appspot.com/o/userAvatars%2Fadmin.jpg?alt=media&token=3482a408-7ed1-41c6-b18f-eb730dc02623",
+      "carts": [
+        {
+          "productId": 1,
+          "quantity": 5,
+          "des": "123"
+        },
+        {
+          "productId": 2,
+          "quantity": 5,
+          "des": "123"
+        }
+      ]
     }
   ]
 }

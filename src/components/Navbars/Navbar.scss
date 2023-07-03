@@ -1,0 +1,43 @@
+@import "@varScss";
+
+.navbar {
+    height: $heightNavbar;
+
+    .container_fluid {
+        .navbar-brand {
+            font-size: $sizeLarge;
+            margin-left: 10px;
+        }
+    }
+
+    .searchBox {
+        margin-right: 15px;
+        align-items: center;
+        height: 100%;
+
+        .icon {
+            margin-left: 10px;
+
+            .icon_img {
+                margin-left: 10px;
+
+                &:last-child {
+                    margin-left: none;
+                }
+            }
+        }
+    }
+
+    .avatarBox {
+        width: 50px;
+        border-radius: 50%;
+        display: flex;
+        background-color: rgb(81, 77, 77);
+
+        .avatarImg {
+            width: 50px;
+            height: 50px;
+            object-fit: fill;
+        }
+    }
+}

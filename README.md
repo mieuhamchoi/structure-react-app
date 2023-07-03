@@ -23,6 +23,14 @@ Node JS version =>  16+
 
 Npm version =>  integrated in node 16+
 
+## Setup App
+
+Run command below for install package library 
+
+```bash
+npm install
+```
+
 ## Run App
 
 Required: PORT 3000 REQUIRED EMPTY PORT

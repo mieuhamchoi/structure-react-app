@@ -1,18 +1,37 @@
 //reset thuộc tính css
-*   { 
+* {
     margin: 0;
     padding: 0;
     border: 0;
     font-size: 100%;
 }
+
+@import "@varScss";
+
+
 .App {
     width: 100%;
     height: 100vh;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+    .navbar_container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        height: $heightNavbar;
+
+        .navbar_contents {
+            width: 100%;
+            max-width: $widthContent;
+            height: 100%;
+        }
+    }
+
     .app_container {
         width: 100%;
-        max-width: 1440px;
+        max-width: $widthContent;
         height: 100%;
     }
 }
